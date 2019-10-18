@@ -3,22 +3,22 @@ header('Content-Type: text/html; charset=utf-8');
 date_default_timezone_set('Asia/Taipei');
 
 // SAVE PATH
-$dir = "/var/www/db/";
+$DIR = '/var/www/';
 
 // FILENAME
-$filename = "dev-" . date("Y-m-d-H-i-s") . ".sql.gz";
+$FILENAME = date('Y-m-d H:i:s') . '.sql.gz';
 
 // DB INFO
-$db_host = "localhost";
-$db_username = "root";
-$db_password = "password";
-$db_database = "db";
+$DB_HOST = 'localhost';
+$DB_USERNAME = 'root';
+$DB_PASSWORD = 'password';
+$DB_DATABASE = 'db';
 
-$cmd = "mysqldump -h {$db_host} -u {$db_username} --password={$db_password} {$db_database} | gzip > {$dir}{$filename}";
+$CMD = "mysqldump -h {$DB_HOST} -u {$DB_USERNAME} --password={$DB_PASSWORD} {$DB_DATABASE} | gzip > {$DIR}{$FILENAME}";
 
-exec($cmd);
+exec($CMD);
 
-header("Content-type: application/octet-stream");
-header("Content-Disposition: attachment; filename=\"$filename\"");
+header('Content-type: application/octet-stream');
+header("Content-Disposition: attachment; filename=\"$FILENAME\"");
 
-passthru("cat {$dir}{$filename}");
+passthru("cat {$DIR}{$FILENAME}");
